@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trans_window"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	tools:context=".KubeWIP">
+	
+    <RelativeLayout android:id="@+id/miniVideoSurfaceLayout"
+    	android:layout_width="fill_parent" 
+        android:layout_height="fill_parent">
+        
+        <ImageView android:id="@+id/mini_novideo_view"
+            android:background="@drawable/tw_ic_no_multimedia_dark"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            tools:ignore="contentDescription" />
+        
+<!-- 
+        <com.sec.android.app.videoplayer.miniapp.MiniVideoSurface
+            android:id="@+id/mini_surface_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true">
+		</com.sec.android.app.videoplayer.miniapp.MiniVideoSurface>
+ -->
+    </RelativeLayout>
+    
+    <RelativeLayout android:id="@+id/mini_empty_layout" 
+    	android:background="@android:color/black"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+	</RelativeLayout>
+    
+    <RelativeLayout android:id="@+id/mini_video_loading_layout"
+		android:gravity="center"
+        android:background="@android:color/black"
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        
+        <LinearLayout android:gravity="center"
+        	android:orientation="horizontal"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	tools:ignore="UselessParent">
+        	    		  
+            <ProgressBar android:id="@+id/mini_video_loading_progress"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_marginRight="4.0dip" />
+            	
+            <TextView android:id="@+id/mini_video_loading_text"
+            	android:textSize="18.0dip"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mediascanner_started" />
+            	
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <RelativeLayout android:id="@+id/mini_video_exit_layout"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true">
+        
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            
+            <ImageView android:id="@+id/mini_video_exit_img"
+                android:background="@drawable/video_player_appinapp_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="contentDescription" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

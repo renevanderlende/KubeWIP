@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    
+    <color name="transparent">#00000000</color>
+	<color name="white">#FFFFFFFF</color>
+    <color name="grey">#FF808080</color>
+	<color name="black">#FF000000</color>
+    
+	<color name="black_overlay">#66000000</color>
+    <color name="blue">#770000FF</color>
+    <color name="darkgray">#FF222222</color>
+    <color name="darkslategray">#FF2F4F4F</color>
+    
+    <color name="row_alt">@color/darkgray</color>
+    <color name="row_main">@color/black</color>
+	<color name="model_border">@color/darkslategray</color>
+	<color name="model_header">@color/darkgray</color>
+
+    <color name="chinchilla">#FF756661</color>
+    <color name="dove_grey">#FFCEC7B8</color>
+    <color name="ecru">#FFEEE7E0</color>
+    <color name="ivory">#FFF8F4E6</color>
+    <color name="kind_giant">#FF948C75</color>
+    <color name="mighty_slate">#FF556270</color>
+    <color name="poached_ivory">#FFD8D8C0</color>
+    <color name="roots">#FF948979</color>
+    <color name="stone">#FF898880</color>
+    <color name="taupe">#FF504946</color>
+        
+    <color name="holo_dark_blue">#FF0099CC</color>
+    <color name="holo_dark_green">#FF669900</color>
+    <color name="holo_dark_orange">#FFFF8800</color>
+    <color name="holo_dark_purple">#FF9933CC</color>
+    <color name="holo_dark_red">#FFCC0000</color>
+    
+    <color name="holo_blue">#FF33B5E5</color>
+    <color name="holo_green">#FF99CC00</color>
+    <color name="holo_orange">#FFFFBB33</color>
+    <color name="holo_purple">#FFAA66CC</color>
+    <color name="holo_red">#FFFF4444</color>
+</resources>

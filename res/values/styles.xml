@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 
+    		All Mediavision Themes default to Translucent/NoActionBar/[DarkTitleBar]/Fullscreen 
+    -->
+    	
+    <!-- Default themes API 11 or higher (Holo) -->
+    <style name="MediaVision.Theme.Holo" parent="android:Theme.Holo">
+        <!-- .Translucent -->
+	    <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        
+        <!-- .NoActionBar -->
+		<item name="android:windowActionBar">false</item>
+		<item name="android:windowNoTitle">true</item>
+		
+        <!-- .NoActionBar.Fullscreen -->
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+
+		<!-- Transparent backgrounds -->
+    	<item name="android:colorBackground">@color/transparent</item>
+<!--    	<item name="android:windowIsFloating">true</item> -->
+	</style>
+    	
+	<style name="MediaVision.Theme.Holo.Black" parent="MediaVision.Theme.Holo"/> <!-- Default android Holo theme settings are "Black" -->
+	    
+	<style name="MediaVision.Theme.Holo.Light" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- .Translucent -->
+	    <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        
+        <!-- .NoActionBar -->
+		<item name="android:windowActionBar">false</item>
+ 		<item name="android:windowNoTitle">true</item>
+		
+        <!-- .NoActionBar.Fullscreen -->
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+
+		<!-- Transparent backgrounds -->
+    	<item name="android:colorBackground">@color/transparent</item>
+<!--    	<item name="android:windowIsFloating">true</item> -->
+    		</style>
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+    -->
+    <style name="AppBaseTheme" parent="MediaVision.Theme.Holo.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
+    <style name="ButtonBarButton" /> <!-- WTF?? Why? -->
+
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="MediaVision.Theme.Holo.Light">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+	    <item name="buttonBarStyle">@style/ButtonBar</item>
+        <item name="buttonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+		    
+</resources>
