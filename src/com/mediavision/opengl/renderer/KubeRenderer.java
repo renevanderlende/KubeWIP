@@ -23,7 +23,7 @@ import android.opengl.GLSurfaceView;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import com.mediavision.opengl.primitives.GLWorld;
+import com.mediavision.opengl.primitives.World3D;
 
 
 /**
@@ -35,7 +35,7 @@ public class KubeRenderer implements GLSurfaceView.Renderer {
         void animate();
     }
 
-    public KubeRenderer(GLWorld world, AnimationCallback callback) {
+    public KubeRenderer(World3D world, AnimationCallback callback) {
         mWorld = world;
         mCallback = callback;
     }
@@ -122,7 +122,7 @@ public class KubeRenderer implements GLSurfaceView.Renderer {
         return mAngle;
     }
 
-    private GLWorld mWorld;
+    private World3D mWorld;
     private AnimationCallback mCallback;
     private float mAngle;
 }

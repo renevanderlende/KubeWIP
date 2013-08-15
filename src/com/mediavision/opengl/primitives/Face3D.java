@@ -21,38 +21,38 @@ import android.util.Log;
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
 
-public class GLFace {
+public class Face3D {
 
-	public GLFace() {
+	public Face3D() {
 		
 	}
 	
 	// for triangles
-	public GLFace(GLVertex v1, GLVertex v2, GLVertex v3) {
+	public Face3D(Vertex3D v1, Vertex3D v2, Vertex3D v3) {
 		addVertex(v1);
 		addVertex(v2);
 		addVertex(v3);
 	}	
 	// for quadrilaterals
-	public GLFace(GLVertex v1, GLVertex v2, GLVertex v3, GLVertex v4) {
+	public Face3D(Vertex3D v1, Vertex3D v2, Vertex3D v3, Vertex3D v4) {
 		addVertex(v1);
 		addVertex(v2);
 		addVertex(v3);
 		addVertex(v4);
 	}
 		
-	public void addVertex(GLVertex v) {
+	public void addVertex(Vertex3D v) {
 		mVertexList.add(v);
 	}
 	
 	// must be called after all vertices are added
-	public void setColor(GLColor c) {
+	public void setColor(Color3D c) {
 		
 		int last = mVertexList.size() - 1;
 		if (last < 2) {
 			Log.e("GLFace", "not enough vertices in setColor()");
 		} else {
-			GLVertex vertex = mVertexList.get(last);
+			Vertex3D vertex = mVertexList.get(last);
 			
 			// only need to do this if the color has never been set
 			if (mColor == null) {
@@ -76,12 +76,12 @@ public class GLFace {
 	public void putIndices(ShortBuffer buffer) {
 		int last = mVertexList.size() - 1;
 
-		GLVertex v0 = mVertexList.get(0);
-		GLVertex vn = mVertexList.get(last);
+		Vertex3D v0 = mVertexList.get(0);
+		Vertex3D vn = mVertexList.get(last);
 		
 		// push triangles into the buffer
 		for (int i = 1; i < last; i++) {
-			GLVertex v1 = mVertexList.get(i);
+			Vertex3D v1 = mVertexList.get(i);
 			buffer.put(v0.index);
 			buffer.put(v1.index);
 			buffer.put(vn.index);
@@ -89,6 +89,6 @@ public class GLFace {
 		}
 	}
 	
-	private ArrayList<GLVertex> mVertexList = new ArrayList<GLVertex>();
-	private GLColor mColor;
+	private ArrayList<Vertex3D> mVertexList = new ArrayList<Vertex3D>();
+	private Color3D mColor;
 }

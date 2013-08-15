@@ -32,10 +32,10 @@ import android.view.WindowManager.LayoutParams;
 
 import com.mediavision.app.R;
 import com.mediavision.opengl.primitives.Cube;
-import com.mediavision.opengl.primitives.GLColor;
-import com.mediavision.opengl.primitives.GLShape;
-import com.mediavision.opengl.primitives.GLWorld;
-import com.mediavision.opengl.primitives.Layer;
+import com.mediavision.opengl.primitives.Color3D;
+import com.mediavision.opengl.primitives.Shape3D;
+import com.mediavision.opengl.primitives.World3D;
+import com.mediavision.opengl.primitives.Layer3D;
 import com.mediavision.opengl.renderer.KubeRenderer;
 import com.mediavision.opengl.view.KubeGLSurfaceView;
 
@@ -160,20 +160,20 @@ public class KubeWIP extends Activity implements KubeRenderer.AnimationCallback 
 		return mSuccess;
 	}
 	
-    private GLWorld makeGLWorld()
+    private World3D makeGLWorld()
     {
-        GLWorld world = new GLWorld();
+        World3D world = new World3D();
 
         int one  = 0x10000;
         int half = 0x08000;
         
-        GLColor red    = new GLColor(one, 0   , 0  );
-        GLColor green  = new GLColor(0  , one , 0  );
-        GLColor blue   = new GLColor(0  , 0   , one);
-        GLColor yellow = new GLColor(one, one , 0  );
-        GLColor orange = new GLColor(one, half, 0  );
-        GLColor white  = new GLColor(one, one , one);
-        GLColor black  = new GLColor(0  , 0   , 0  );
+        Color3D red    = new Color3D(one, 0   , 0  );
+        Color3D green  = new Color3D(0  , one , 0  );
+        Color3D blue   = new Color3D(0  , 0   , one);
+        Color3D yellow = new Color3D(one, one , 0  );
+        Color3D orange = new Color3D(one, half, 0  );
+        Color3D white  = new Color3D(one, one , one);
+        Color3D black  = new Color3D(0  , 0   , 0  );
 
         // coordinates for our cubes
         float c0 = -1.00f;
@@ -270,78 +270,78 @@ public class KubeWIP extends Activity implements KubeRenderer.AnimationCallback 
     }
 
     private void createLayers() {
-        mLayers[kUp]      = new Layer(Layer.kAxisY);
-        mLayers[kDown]    = new Layer(Layer.kAxisY);
-        mLayers[kLeft]    = new Layer(Layer.kAxisX);
-        mLayers[kRight]   = new Layer(Layer.kAxisX);
-        mLayers[kFront]   = new Layer(Layer.kAxisZ);
-        mLayers[kBack]    = new Layer(Layer.kAxisZ);
-        mLayers[kMiddle]  = new Layer(Layer.kAxisX);
-        mLayers[kEquator] = new Layer(Layer.kAxisY);
-        mLayers[kSide] 	  = new Layer(Layer.kAxisZ);
+        mLayers[kUp]      = new Layer3D(Layer3D.kAxisY);
+        mLayers[kDown]    = new Layer3D(Layer3D.kAxisY);
+        mLayers[kLeft]    = new Layer3D(Layer3D.kAxisX);
+        mLayers[kRight]   = new Layer3D(Layer3D.kAxisX);
+        mLayers[kFront]   = new Layer3D(Layer3D.kAxisZ);
+        mLayers[kBack]    = new Layer3D(Layer3D.kAxisZ);
+        mLayers[kMiddle]  = new Layer3D(Layer3D.kAxisX);
+        mLayers[kEquator] = new Layer3D(Layer3D.kAxisY);
+        mLayers[kSide] 	  = new Layer3D(Layer3D.kAxisZ);
     }
 
     private void updateLayers() {
-        Layer layer;
-        GLShape[] shapes;
+        Layer3D layer3D;
+        Shape3D[] shapes;
         int i, j, k;
 
         // up layer
-        layer = mLayers[kUp];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kUp];
+        shapes = layer3D.mShapes;
         for (i = 0; i < 9; i++)
             shapes[i] = mCubes[mPermutation[i]];
 
         // down layer
-        layer = mLayers[kDown];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kDown];
+        shapes = layer3D.mShapes;
         for (i = 18, k = 0; i < 27; i++)
             shapes[k++] = mCubes[mPermutation[i]];
 
         // left layer
-        layer = mLayers[kLeft];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kLeft];
+        shapes = layer3D.mShapes;
         for (i = 0, k = 0; i < 27; i += 9)
             for (j = 0; j < 9; j += 3)
                 shapes[k++] = mCubes[mPermutation[i + j]];
 
         // right layer
-        layer = mLayers[kRight];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kRight];
+        shapes = layer3D.mShapes;
         for (i = 2, k = 0; i < 27; i += 9)
             for (j = 0; j < 9; j += 3)
                 shapes[k++] = mCubes[mPermutation[i + j]];
 
         // front layer
-        layer = mLayers[kFront];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kFront];
+        shapes = layer3D.mShapes;
         for (i = 6, k = 0; i < 27; i += 9)
             for (j = 0; j < 3; j++)
                 shapes[k++] = mCubes[mPermutation[i + j]];
 
         // back layer
-        layer = mLayers[kBack];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kBack];
+        shapes = layer3D.mShapes;
         for (i = 0, k = 0; i < 27; i += 9)
             for (j = 0; j < 3; j++)
                 shapes[k++] = mCubes[mPermutation[i + j]];
 
         // middle layer
-        layer = mLayers[kMiddle];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kMiddle];
+        shapes = layer3D.mShapes;
         for (i = 1, k = 0; i < 27; i += 9)
             for (j = 0; j < 9; j += 3)
                 shapes[k++] = mCubes[mPermutation[i + j]];
 
         // equator layer
-        layer = mLayers[kEquator];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kEquator];
+        shapes = layer3D.mShapes;
         for (i = 9, k = 0; i < 18; i++)
             shapes[k++] = mCubes[mPermutation[i]];
 
         // side layer
-        layer = mLayers[kSide];
-        shapes = layer.mShapes;
+        layer3D = mLayers[kSide];
+        shapes = layer3D.mShapes;
         for (i = 3, k = 0; i < 27; i += 9)
             for (j = 0; j < 3; j++)
                 shapes[k++] = mCubes[mPermutation[i + j]];
@@ -433,13 +433,13 @@ public class KubeWIP extends Activity implements KubeRenderer.AnimationCallback 
     KubeRenderer 	  mRenderer;
     
     Cube[]  mCubes  = new Cube[27];
-    Layer[] mLayers = new Layer[9]; 							  // a Layer for each possible move
+    Layer3D[] mLayers = new Layer3D[9]; 							  // a Layer for each possible move
     
     int[] mPermutation; 										  // current permutation of starting position
     int[] mCurrentLayerPermutation;
 
     Random mRandom      = new Random(System.currentTimeMillis()); // for random cube movements
-    Layer mCurrentLayer = null; 								  // currently turning layer
+    Layer3D mCurrentLayer = null; 								  // currently turning layer
 
     float mCurrentAngle, mEndAngle; 							  // current and final angle for current Layer animation
     float mAngleIncrement; 										  // amount to increment angle

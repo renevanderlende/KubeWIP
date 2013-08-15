@@ -27,9 +27,9 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.mediavision.opengl.matrix.M4;
 
-public class GLWorld {
+public class World3D {
 
-	public void addShape(GLShape shape) {
+	public void addShape(Shape3D shape) {
 		mShapeList.add(shape);
 		mIndexCount += shape.getIndexCount();
 	}
@@ -47,26 +47,26 @@ public class GLWorld {
 	    bb.order(ByteOrder.nativeOrder());
 	    mIndexBuffer = bb.asShortBuffer();
 
-		Iterator<GLVertex> iter2 = mVertexList.iterator();
+		Iterator<Vertex3D> iter2 = mVertexList.iterator();
 		while (iter2.hasNext()) {
-			GLVertex vertex = iter2.next();
+			Vertex3D vertex = iter2.next();
 			vertex.put(mVertexBuffer, mColorBuffer);
 		}
 
-		Iterator<GLShape> iter3 = mShapeList.iterator();
+		Iterator<Shape3D> iter3 = mShapeList.iterator();
 		while (iter3.hasNext()) {
-			GLShape shape = iter3.next();
+			Shape3D shape = iter3.next();
 			shape.putIndices(mIndexBuffer);
 		}
 	}
 	
-	public GLVertex addVertex(float x, float y, float z) {
-		GLVertex vertex = new GLVertex(x, y, z, mVertexList.size());
+	public Vertex3D addVertex(float x, float y, float z) {
+		Vertex3D vertex = new Vertex3D(x, y, z, mVertexList.size());
 		mVertexList.add(vertex);
 		return vertex;
 	}
 	
-	public void transformVertex(GLVertex vertex, M4 transform) {
+	public void transformVertex(Vertex3D vertex, M4 transform) {
 		vertex.update(mVertexBuffer, transform);
 	}
 
@@ -89,8 +89,8 @@ public class GLWorld {
     	return x/65536.0f;
     }
 
-	private ArrayList<GLShape>	mShapeList  = new ArrayList<GLShape>();	
-	private ArrayList<GLVertex>	mVertexList = new ArrayList<GLVertex>();
+	private ArrayList<Shape3D>	mShapeList  = new ArrayList<Shape3D>();	
+	private ArrayList<Vertex3D>	mVertexList = new ArrayList<Vertex3D>();
 	
 	private int mIndexCount = 0;
 

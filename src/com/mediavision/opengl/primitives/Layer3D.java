@@ -18,9 +18,9 @@ package com.mediavision.opengl.primitives;
 
 import com.mediavision.opengl.matrix.M4;
 
-public class Layer {
+public class Layer3D {
 	
-	public Layer(int axis) {
+	public Layer3D(int axis) {
 		// start with identity matrix for transformation
 		mAxis = axis;
 		mTransform.setIdentity();
@@ -28,7 +28,7 @@ public class Layer {
 	
 	public void startAnimation() {
 		for (int i = 0; i < mShapes.length; i++) {
-			GLShape shape = mShapes[i];
+			Shape3D shape = mShapes[i];
 			if (shape != null) {
 				shape.startAnimation();
 			}	
@@ -37,7 +37,7 @@ public class Layer {
 
 	public void endAnimation() {
 		for (int i = 0; i < mShapes.length; i++) {
-			GLShape shape = mShapes[i];
+			Shape3D shape = mShapes[i];
 			if (shape != null) {
 				shape.endAnimation();
 			}	
@@ -83,14 +83,14 @@ public class Layer {
 		}
 		
 		for (int i = 0; i < mShapes.length; i++) {
-			GLShape shape = mShapes[i];
+			Shape3D shape = mShapes[i];
 			if (shape != null) {
 				shape.animateTransform(mTransform);
 			}
 		}
 	}
 	
-	public GLShape[] mShapes = new GLShape[9];
+	public Shape3D[] mShapes = new Shape3D[9];
 	M4 mTransform = new M4();
 //	float mAngle;
 

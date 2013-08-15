@@ -9,7 +9,7 @@ import com.mediavision.opengl.common.GlVertex;
 import com.mediavision.opengl.common.Utils;
 
 
-public class GlCube extends GlObject {
+public class Cube3D extends Object3D {
 	
 	private final static float[][] cubeVertexCoordsTemplate = new float[][] {
 		new float[] { // top
@@ -139,7 +139,7 @@ public class GlCube extends GlObject {
 	private FloatBuffer coordsBfr;
 	private FloatBuffer texCoordsBfr;
 	
-	public GlCube(float size) {
+	public Cube3D(float size) {
 		this.size = size;
 		generateData();
 	}

@@ -9,67 +9,72 @@ import com.mediavision.opengl.common.GlVertex;
 import com.mediavision.opengl.common.Utils;
 
 
-public class GlDisk extends GlObject {
+public class Sphere3D extends Object3D {
 	
-	private float innerRadius;
-	private float outerRadius;
+	private float radius;
 	private int nrSlices;
-	private int nrLoops;
-	private float startAngle;
-	private float stopAngle;
+	private int nrStacks;
 	
 	private FloatBuffer coordsBuffer;
 	private FloatBuffer normalsBuffer;
 	private FloatBuffer texCoordsBuffer;
 	
-	public GlDisk(float innerRadius, float outerRadius, int slices, int loops) {
-		this(innerRadius, outerRadius, slices, loops, 0.0f, (float)(2 * Math.PI));
-	}
-	
-	public GlDisk(float innerRadius, float outerRadius, int slices, int loops, float startAngle, float stopAngle) {
-		this.innerRadius = innerRadius;
-		this.outerRadius = outerRadius;
-		this.nrSlices = slices;
-		this.nrLoops = loops;
-		this.startAngle = startAngle;
-		this.stopAngle = stopAngle;
+	public Sphere3D(float radius, int nrSlices, int nrStacks) {
+		this.radius = radius;
+		this.nrStacks = nrStacks;
+		this.nrSlices = nrSlices;
 		generateData();
 	}
 	
 	private void generateData() {
 		
-		float[] vertexCoords = new float[3 * nrLoops * 2 * (nrSlices + 1)];
-		float[] normalCoords = new float[3 * nrLoops * 2 * (nrSlices + 1)];
-		float[] textureCoords = new float[2 * nrLoops * 2 * (nrSlices + 1)];
+		float[] vertexCoords = new float[3 * nrSlices * 2 * (nrStacks + 1)];
+		float[] normalCoords = new float[3 * nrSlices * 2 * (nrStacks + 1)];
+		float[] textureCoords = new float[2 * nrSlices * 2 * (nrStacks + 1)];
 		
-		for (int i = 0; i < nrLoops; i++) {
+		for (int i = 0; i < nrSlices; i++) {
 			
-			float r0 = innerRadius + (outerRadius - innerRadius) * i / nrLoops;
-			float r1 = innerRadius + (outerRadius - innerRadius) * (i + 1) / nrLoops;
+			double alpha0 = i * (2 * Math.PI) / nrSlices;
+			double alpha1 = (i + 1) * (2 * Math.PI) / nrSlices;
 			
-			int elemIdx = i * 2 * (nrSlices + 1);
+			float cosAlpha0 = (float) Math.cos(alpha0);
+			float sinAlpha0 = (float) Math.sin(alpha0);
+			float cosAlpha1 = (float) Math.cos(alpha1);
+			float sinAlpha1 = (float) Math.sin(alpha1);
+
+			int elemIdx = i * 2 * (nrStacks + 1);
 			
-			for (int j = 0; j <= nrSlices; j++) {
+			for (int j = 0; j <= nrStacks; j++) {
 				
-				double alpha = startAngle + (stopAngle - startAngle) * j / nrSlices;
+				double beta = j * Math.PI / nrStacks - Math.PI / 2;
 				
-				float sinAlpha = (float) Math.sin(alpha);
-				float cosAlpha = (float) Math.cos(alpha);
+				float cosBeta = (float) Math.cos(beta);
+				float sinBeta = (float) Math.sin(beta);
 				
 				Utils.setXYZ(vertexCoords, 3 * elemIdx + 3 * 2 * j,
-						cosAlpha * r0, sinAlpha * r0, 0);
+						radius * cosBeta * cosAlpha1,
+						radius * sinBeta,
+						radius * cosBeta * sinAlpha1);
 				Utils.setXYZ(vertexCoords, 3 * elemIdx + 3 * 2 * j + 3,
-						cosAlpha * r1, sinAlpha * r1, 0);
-
+						radius * cosBeta * cosAlpha0,
+						radius * sinBeta,
+						radius * cosBeta * sinAlpha0);
+				
 				Utils.setXYZ(normalCoords, 3 * elemIdx + 3 * 2 * j,
-						0, 0, 1);
+						cosBeta * cosAlpha1,
+						sinBeta,
+						cosBeta * sinAlpha1);
 				Utils.setXYZ(normalCoords, 3 * elemIdx + 3 * 2 * j + 3,
-						0, 0, 1);
+						cosBeta * cosAlpha0,
+						sinBeta,
+						cosBeta * sinAlpha0);
 
 				Utils.setXY(textureCoords, 2 * elemIdx + 2 * 2 * j,
-						((float)j) / nrSlices, ((float)i) / nrLoops);
+						((float) (i + 1)) / nrSlices,
+						((float) j) / nrStacks);
 				Utils.setXY(textureCoords, 2 * elemIdx + 2 * 2 * j + 2,
-						((float)j) / nrSlices, ((float)i + 1) / nrLoops);
+						((float) i) / nrSlices,
+						((float) j) / nrStacks);
 			}
 		}
 
@@ -77,7 +82,6 @@ public class GlDisk extends GlObject {
 		normalsBuffer = Utils.wrapDirect(normalCoords);
 		texCoordsBuffer = Utils.wrapDirect(textureCoords);
 	}
-	
 	
 	@Override
 	public void draw(GL10 gl) {
@@ -89,8 +93,8 @@ public class GlDisk extends GlObject {
 		gl.glNormalPointer(GL10.GL_FLOAT, 0, normalsBuffer);
 		gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, texCoordsBuffer);
 		
-		for (int i = 0; i < nrLoops; i++) {
-			gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, i * 2 * (nrSlices + 1), 2 * (nrSlices + 1));
+		for (int i = 0; i < nrSlices; i++) {
+			gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, i * 2 * (nrStacks + 1), 2 * (nrStacks + 1));
 		}
 		
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
@@ -103,7 +107,7 @@ public class GlDisk extends GlObject {
 		Utils.computeSphereEnvTexCoords(
 				vEye.data, mInvRot.data,
 				coordsBuffer, normalsBuffer, texCoordsBuffer,
-				nrLoops * 2 * (nrSlices + 1));
+				nrSlices * 2 * (nrStacks + 1));
 	}
 	
 }

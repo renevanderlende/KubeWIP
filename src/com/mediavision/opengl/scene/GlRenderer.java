@@ -10,12 +10,12 @@ import javax.microedition.khronos.opengles.GL10;
  *  TODO: Change following import to initialize an array of textures		
  */
 //import com.mediavision.opengl.mirror.R;
-import com.mediavision.opengl.primitives.GlCube;
-import com.mediavision.opengl.primitives.GlCylinder;
-import com.mediavision.opengl.primitives.GlDisk;
-import com.mediavision.opengl.primitives.GlObject;
-import com.mediavision.opengl.primitives.GlPlane;
-import com.mediavision.opengl.primitives.GlSphere;
+import com.mediavision.opengl.primitives.Cube3D;
+import com.mediavision.opengl.primitives.Cylinder3D;
+import com.mediavision.opengl.primitives.Disk3D;
+import com.mediavision.opengl.primitives.Object3D;
+import com.mediavision.opengl.primitives.Plane3D;
+import com.mediavision.opengl.primitives.Sphere3D;
 import com.mediavision.opengl.common.GlMatrix;
 import com.mediavision.opengl.common.GlVertex;
 import com.mediavision.opengl.common.Utils;
@@ -45,14 +45,14 @@ public class GlRenderer implements Renderer {
 	
 	private IntBuffer texturesBuffer;
 	
-	private static GlCube cube;
-	private static GlCylinder cylinder;
-	private static GlDisk disk;
-	private static GlSphere sphere;
-	private static GlCylinder cone;
-	private static GlDisk partialDisk;
+	private static Cube3D cube;
+	private static Cylinder3D cylinder;
+	private static Disk3D disk;
+	private static Sphere3D sphere;
+	private static Cylinder3D cone;
+	private static Disk3D partialDisk;
 	
-	private static GlPlane background;
+	private static Plane3D background;
 
 	static final SceneState sceneState;
 	private long lastMillis;
@@ -62,14 +62,14 @@ public class GlRenderer implements Renderer {
 		lightDifBfr = FloatBuffer.wrap(lightDif);
 		lightPosBfr = FloatBuffer.wrap(lightPos);
 
-		cube = new GlCube(1.0f);
-		cylinder = new GlCylinder(1.0f, 1.0f, 3.0f, 16, 4);
-		disk = new GlDisk(0.5f, 1.5f, 16, 4);
-		sphere = new GlSphere(1.3f, 16, 8);
-		cone = new GlCylinder(1.0f, 0.0f, 3.0f, 16, 4);
-		partialDisk = new GlDisk(0.5f, 1.5f, 16, 4, (float) (Math.PI / 4), (float) (7 * Math.PI / 4));
+		cube = new Cube3D(1.0f);
+		cylinder = new Cylinder3D(1.0f, 1.0f, 3.0f, 16, 4);
+		disk = new Disk3D(0.5f, 1.5f, 16, 4);
+		sphere = new Sphere3D(1.3f, 16, 8);
+		cone = new Cylinder3D(1.0f, 0.0f, 3.0f, 16, 4);
+		partialDisk = new Disk3D(0.5f, 1.5f, 16, 4, (float) (Math.PI / 4), (float) (7 * Math.PI / 4));
 		
-		background = new GlPlane(16, 12, true, true);
+		background = new Plane3D(16, 12, true, true);
 		
 		sceneState = new SceneState();
 	}
@@ -184,7 +184,7 @@ public class GlRenderer implements Renderer {
 		}
 		
 		// identify object to draw
-		GlObject object = null;
+		Object3D object = null;
 		boolean doubleSided = false;
 		switch (sceneState.objectIdx) {
 		case 0:

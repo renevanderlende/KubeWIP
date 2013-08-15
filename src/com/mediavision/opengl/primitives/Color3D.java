@@ -16,21 +16,21 @@
 
 package com.mediavision.opengl.primitives;
 
-public class GLColor {
+public class Color3D {
 
     public final int red;
     public final int green;
     public final int blue;
     public final int alpha;
 
-    public GLColor(int red, int green, int blue, int alpha) {
+    public Color3D(int red, int green, int blue, int alpha) {
         this.red = red;
         this.green = green;
         this.blue = blue;
         this.alpha = alpha;
     }
 
-    public GLColor(int red, int green, int blue) {
+    public Color3D(int red, int green, int blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -39,8 +39,8 @@ public class GLColor {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof GLColor) {
-            GLColor color = (GLColor)other;
+        if (other instanceof Color3D) {
+            Color3D color = (Color3D)other;
             return (red == color.red &&
                     green == color.green &&
                     blue == color.blue &&

@@ -22,51 +22,51 @@ import java.util.Iterator;
 
 import com.mediavision.opengl.matrix.M4;
 
-public class GLShape {
+public class Shape3D {
 
-	public GLShape(GLWorld world) {
+	public Shape3D(World3D world) {
 		mWorld = world;
 	}
 	
-	public void addFace(GLFace face) {
+	public void addFace(Face3D face) {
 		mFaceList.add(face);
 	}
 	
-	public void setFaceColor(int face, GLColor color) {
+	public void setFaceColor(int face, Color3D color) {
 		mFaceList.get(face).setColor(color);
 	}
 			
 	public void putIndices(ShortBuffer buffer) {
-		Iterator<GLFace> iter = mFaceList.iterator();
+		Iterator<Face3D> iter = mFaceList.iterator();
 		while (iter.hasNext()) {
-			GLFace face = iter.next();
+			Face3D face = iter.next();
 			face.putIndices(buffer);
 		}		
 	}
 	
 	public int getIndexCount() {
 		int count = 0;
-		Iterator<GLFace> iter = mFaceList.iterator();
+		Iterator<Face3D> iter = mFaceList.iterator();
 		while (iter.hasNext()) {
-			GLFace face = iter.next();
+			Face3D face = iter.next();
 			count += face.getIndexCount();
 		}		
 		return count;
 	}
 
-	public GLVertex addVertex(float x, float y, float z) {
+	public Vertex3D addVertex(float x, float y, float z) {
 		
 		// look for an existing GLVertex first
-		Iterator<GLVertex> iter = mVertexList.iterator();
+		Iterator<Vertex3D> iter = mVertexList.iterator();
 		while (iter.hasNext()) {
-			GLVertex vertex = iter.next();
+			Vertex3D vertex = iter.next();
 			if (vertex.x == x && vertex.y == y && vertex.z == z) {
 				return vertex;
 			}
 		}
 		
 		// doesn't exist, so create new vertex
-		GLVertex vertex = mWorld.addVertex(x, y, z);
+		Vertex3D vertex = mWorld.addVertex(x, y, z);
 		mVertexList.add(vertex);
 		return vertex;
 	}
@@ -77,9 +77,9 @@ public class GLShape {
 		if (mTransform != null)
 			transform = mTransform.multiply(transform);
 
-		Iterator<GLVertex> iter = mVertexList.iterator();
+		Iterator<Vertex3D> iter = mVertexList.iterator();
 		while (iter.hasNext()) {
-			GLVertex vertex = iter.next();
+			Vertex3D vertex = iter.next();
 			mWorld.transformVertex(vertex, transform);
 		}
 	}
@@ -97,8 +97,8 @@ public class GLShape {
 
 	public M4						mTransform;
 	public M4						mAnimateTransform;
-	protected ArrayList<GLFace>		mFaceList = new ArrayList<GLFace>();
-	protected ArrayList<GLVertex>	mVertexList = new ArrayList<GLVertex>();
+	protected ArrayList<Face3D>		mFaceList = new ArrayList<Face3D>();
+	protected ArrayList<Vertex3D>	mVertexList = new ArrayList<Vertex3D>();
 	protected ArrayList<Integer>	mIndexList = new ArrayList<Integer>();	// make more efficient?
-	protected GLWorld mWorld;
+	protected World3D mWorld;
 }

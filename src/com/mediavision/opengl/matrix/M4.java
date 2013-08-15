@@ -16,7 +16,7 @@
 
 package com.mediavision.opengl.matrix;
 
-import com.mediavision.opengl.primitives.GLVertex;
+import com.mediavision.opengl.primitives.Vertex3D;
 
 /** 
  * 
@@ -37,7 +37,7 @@ public class M4 {
 		}		
 	}
 
-	public void multiply(GLVertex src, GLVertex dest) {
+	public void multiply(Vertex3D src, Vertex3D dest) {
 		dest.x = src.x * m[0][0] + src.y * m[1][0] + src.z * m[2][0] + m[3][0];
 		dest.y = src.x * m[0][1] + src.y * m[1][1] + src.z * m[2][1] + m[3][1];
 		dest.z = src.x * m[0][2] + src.y * m[1][2] + src.z * m[2][2] + m[3][2];

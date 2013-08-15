@@ -8,7 +8,7 @@ import com.mediavision.opengl.common.GlMatrix;
 import com.mediavision.opengl.common.GlVertex;
 
 
-public class GlPlane extends GlObject {
+public class Plane3D extends Object3D {
 	
 	private final static float[] planeVertexCoordsTemplate = new float[] {
 		 1, 1, 0,
@@ -47,7 +47,7 @@ public class GlPlane extends GlObject {
 	
 	private FloatBuffer planeVertexBfr;
 	
-	public GlPlane(float width, float height, boolean useNormals, boolean useTexCoords) {
+	public Plane3D(float width, float height, boolean useNormals, boolean useTexCoords) {
 		this.width = width;
 		this.height = height;
 		this.useNormals = useNormals;

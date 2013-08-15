@@ -20,22 +20,22 @@ import java.nio.IntBuffer;
 
 import com.mediavision.opengl.matrix.M4;
 
-public class GLVertex {
+public class Vertex3D {
 
     public float x;
     public float y;
     public float z;
     final short index; // index in vertex table
-    GLColor color;
+    Color3D color;
 
-    GLVertex() {
+    Vertex3D() {
         this.x = 0;
         this.y = 0;
         this.z = 0;
         this.index = -1;
     }
 
-    GLVertex(float x, float y, float z, int index) {
+    Vertex3D(float x, float y, float z, int index) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -44,8 +44,8 @@ public class GLVertex {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof GLVertex) {
-            GLVertex v = (GLVertex)other;
+        if (other instanceof Vertex3D) {
+            Vertex3D v = (Vertex3D)other;
             return (x == v.x && y == v.y && z == v.z);
         }
         return false;
@@ -81,7 +81,7 @@ public class GLVertex {
             vertexBuffer.put(toFixed(y));
             vertexBuffer.put(toFixed(z));
         } else {
-            GLVertex temp = new GLVertex();
+            Vertex3D temp = new Vertex3D();
             transform.multiply(this, temp);
             vertexBuffer.put(toFixed(temp.x));
             vertexBuffer.put(toFixed(temp.y));

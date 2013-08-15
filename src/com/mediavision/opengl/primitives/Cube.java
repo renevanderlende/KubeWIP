@@ -16,28 +16,28 @@
 
 package com.mediavision.opengl.primitives;
 
-public class Cube extends GLShape {
+public class Cube extends Shape3D {
 
-	public Cube(GLWorld world, float left, float bottom, float back, float right, float top, float front) {
+	public Cube(World3D world, float left, float bottom, float back, float right, float top, float front) {
 
 		super(world);
 		
-       	GLVertex leftBottomBack   = addVertex(left , bottom, back);
-        GLVertex rightBottomBack  = addVertex(right, bottom, back);
-       	GLVertex leftTopBack 	  = addVertex(left , top   , back);
-        GLVertex rightTopBack 	  = addVertex(right, top   , back);
-       	GLVertex leftBottomFront  = addVertex(left , bottom, front);
-        GLVertex rightBottomFront = addVertex(right, bottom, front);
-       	GLVertex leftTopFront 	  = addVertex(left , top   , front);
-        GLVertex rightTopFront 	  = addVertex(right, top   , front);
+       	Vertex3D leftBottomBack   = addVertex(left , bottom, back);
+        Vertex3D rightBottomBack  = addVertex(right, bottom, back);
+       	Vertex3D leftTopBack 	  = addVertex(left , top   , back);
+        Vertex3D rightTopBack 	  = addVertex(right, top   , back);
+       	Vertex3D leftBottomFront  = addVertex(left , bottom, front);
+        Vertex3D rightBottomFront = addVertex(right, bottom, front);
+       	Vertex3D leftTopFront 	  = addVertex(left , top   , front);
+        Vertex3D rightTopFront 	  = addVertex(right, top   , front);
 
         // vertices are added in a clockwise orientation (when viewed from the outside)
-        addFace(new GLFace(leftBottomBack , leftBottomFront , rightBottomFront, rightBottomBack)); // bottom
-        addFace(new GLFace(leftBottomFront, leftTopFront	, rightTopFront	  , rightBottomFront));// front
-        addFace(new GLFace(leftBottomBack , leftTopBack		, leftTopFront	  , leftBottomFront)); // left
-        addFace(new GLFace(rightBottomBack, rightBottomFront, rightTopFront	  , rightTopBack));	   // right
-        addFace(new GLFace(leftBottomBack , rightBottomBack , rightTopBack	  , leftTopBack));	   // back
-        addFace(new GLFace(leftTopBack    , rightTopBack	, rightTopFront	  , leftTopFront));	   // top
+        addFace(new Face3D(leftBottomBack , leftBottomFront , rightBottomFront, rightBottomBack)); // bottom
+        addFace(new Face3D(leftBottomFront, leftTopFront	, rightTopFront	  , rightBottomFront));// front
+        addFace(new Face3D(leftBottomBack , leftTopBack		, leftTopFront	  , leftBottomFront)); // left
+        addFace(new Face3D(rightBottomBack, rightBottomFront, rightTopFront	  , rightTopBack));	   // right
+        addFace(new Face3D(leftBottomBack , rightBottomBack , rightTopBack	  , leftTopBack));	   // back
+        addFace(new Face3D(leftTopBack    , rightTopBack	, rightTopFront	  , leftTopFront));	   // top
 	}
 	
     public static final int kBottom = 0;

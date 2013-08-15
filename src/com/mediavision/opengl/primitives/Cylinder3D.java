@@ -9,7 +9,7 @@ import com.mediavision.opengl.common.GlVertex;
 import com.mediavision.opengl.common.Utils;
 
 
-public class GlCylinder extends GlObject {
+public class Cylinder3D extends Object3D {
 	
 	float base;
 	float top;
@@ -21,7 +21,7 @@ public class GlCylinder extends GlObject {
 	private FloatBuffer normalsBuffer;
 	private FloatBuffer texCoordsBuffer;
 	
-	public GlCylinder(float base, float top, float height, int nrSlices, int nrStacks) {
+	public Cylinder3D(float base, float top, float height, int nrSlices, int nrStacks) {
 		this.base = base;
 		this.top = top;
 		this.height = height;
